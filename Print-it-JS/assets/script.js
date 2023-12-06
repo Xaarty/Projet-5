@@ -48,7 +48,12 @@ let bannerTxt = document.getElementById("banner-txt")
 let arrowLeft = document.querySelector("#banner .arrow_left");
 arrowLeft.addEventListener("click", (event) => {
 	if (event.button === 0){
+
 		changementCarrousel --
+
+		if (changementCarrousel < 0 ){
+			changementCarrousel = slides.length - 1
+		}
 
 		//Changement de texte et d'image
 		bannerImg.src = `./assets/images/slideshow/${slides[changementCarrousel].image}`
@@ -67,7 +72,12 @@ arrowLeft.addEventListener("click", (event) => {
 let arrowRight = document.querySelector("#banner .arrow_right");
 arrowRight.addEventListener("click", (event) => {
 	if (event.button === 0){
+
 		changementCarrousel ++
+
+		if (changementCarrousel > slides.length - 1 ){
+			changementCarrousel = 0
+		}
 
 		//Changement de texte et d'image
 		bannerImg.src = `./assets/images/slideshow/${slides[changementCarrousel].image}`

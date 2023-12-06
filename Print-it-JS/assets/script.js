@@ -41,6 +41,7 @@ for (let i = 0; i < slides.length; i++) {
 
 let changementCarrousel = 0
 let bannerImg = document.querySelector(".banner-img")
+let bannerTxt = document.getElementById("banner-txt")
 
 //Event listener vérification du "clic" gauche à la souris
 
@@ -48,8 +49,10 @@ let arrowLeft = document.querySelector("#banner .arrow_left");
 arrowLeft.addEventListener("click", (event) => {
 	if (event.button === 0){
 		changementCarrousel --
+
+		//Changement de texte et d'image
 		bannerImg.src = `./assets/images/slideshow/${slides[changementCarrousel].image}`
-		
+		bannerTxt.innerHTML = slides[changementCarrousel].tagLine       // Attention pas sécurisé
 	}
 });
 
@@ -57,6 +60,9 @@ let arrowRight = document.querySelector("#banner .arrow_right");
 arrowRight.addEventListener("click", (event) => {
 	if (event.button === 0){
 		changementCarrousel ++
+
+		//Changement de texte et d'image
 		bannerImg.src = `./assets/images/slideshow/${slides[changementCarrousel].image}`
+		bannerTxt.innerHTML = slides[changementCarrousel].tagLine       // Attention pas sécurisé
 	}
 });

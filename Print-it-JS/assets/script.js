@@ -53,6 +53,14 @@ arrowLeft.addEventListener("click", (event) => {
 		//Changement de texte et d'image
 		bannerImg.src = `./assets/images/slideshow/${slides[changementCarrousel].image}`
 		bannerTxt.innerHTML = slides[changementCarrousel].tagLine       // Attention pas sécurisé
+
+		//Selectionne tout les dot et enlève la classe 'dot_selected'
+		document.querySelectorAll(".dot").forEach(dot => {
+			dot.classList.remove("dot_selected");})
+		
+		//ajoute la classe dot_selected au dot correspondant
+		let dotChangementCarrousel = document.querySelector(`.dot_${changementCarrousel}`)
+		dotChangementCarrousel.classList.add("dot_selected")
 	}
 });
 
@@ -64,5 +72,13 @@ arrowRight.addEventListener("click", (event) => {
 		//Changement de texte et d'image
 		bannerImg.src = `./assets/images/slideshow/${slides[changementCarrousel].image}`
 		bannerTxt.innerHTML = slides[changementCarrousel].tagLine       // Attention pas sécurisé
+
+		//Selectionne tout les dot et enlève la classe 'dot_selected'
+		document.querySelectorAll(".dot").forEach(dot => {
+			dot.classList.remove("dot_selected");})
+		
+		//ajoute la classe dot_selected au dot correspondant
+		let dotChangementCarrousel = document.querySelector(`.dot_${changementCarrousel}`)
+		dotChangementCarrousel.classList.add("dot_selected")
 	}
 });

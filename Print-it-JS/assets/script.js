@@ -17,12 +17,20 @@ const slides = [
 	},
 ]
 
-console.log(slides)
+slides.forEach((slide) => {
+    const image = slide.image;
+    console.log(image);
+});
+
+
+
+
+//ajout des "dots"
 
 let Dots = document.querySelector(".dots")
 for (let i = 0; i < slides.length; i++) {
 	let dot = document.createElement("div")
-	dot.classList.add("dot")
+	dot.classList.add("dot", "dot_" + i)  //ajout de la class dot et une classe unique avec i
 	if (i === 0) {
 		dot.classList.add("dot_selected")
 	}
@@ -31,23 +39,23 @@ for (let i = 0; i < slides.length; i++) {
 }
 
 
+let changementCarrousel = 0
+let bannerImg = document.querySelector(".banner-img")
+
 //Event listener vérification du "clic" gauche à la souris
 
 let arrowLeft = document.querySelector("#banner .arrow_left");
-
 arrowLeft.addEventListener("click", (event) => {
 	if (event.button === 0){
-		console.log("clic gauche fleche gauche")
+		changementCarrousel --
+		bannerImg.src = `./assets/images/slideshow/${slides[changementCarrousel].image}`
 	}
 });
 
 let arrowRight = document.querySelector("#banner .arrow_right");
-
 arrowRight.addEventListener("click", (event) => {
 	if (event.button === 0){
-
-
-
-		console.log("clic gauche fleche droite")
+		changementCarrousel ++
+		bannerImg.src = `./assets/images/slideshow/${slides[changementCarrousel].image}`
 	}
 });

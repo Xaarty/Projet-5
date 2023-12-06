@@ -17,15 +17,19 @@ const slides = [
 	},
 ]
 
-let carrouselLength = slides.length
+console.log(slides)
+
 let Dots = document.querySelector(".dots")
 for (let i = 0; i < slides.length; i++) {
 	let dot = document.createElement("div")
 	dot.classList.add("dot")
+	if (i === 0) {
+		dot.classList.add("dot_selected")
+	}
 	Dots.appendChild(dot)
 
 }
-console.log(carrouselLength)
+
 
 //Event listener vérification du "clic" gauche à la souris
 
@@ -41,7 +45,9 @@ let arrowRight = document.querySelector("#banner .arrow_right");
 
 arrowRight.addEventListener("click", (event) => {
 	if (event.button === 0){
+
+
+
 		console.log("clic gauche fleche droite")
 	}
 });
-

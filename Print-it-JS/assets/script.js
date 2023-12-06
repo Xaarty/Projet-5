@@ -49,6 +49,7 @@ arrowLeft.addEventListener("click", (event) => {
 	if (event.button === 0){
 		changementCarrousel --
 		bannerImg.src = `./assets/images/slideshow/${slides[changementCarrousel].image}`
+		
 	}
 });
 

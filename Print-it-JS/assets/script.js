@@ -17,14 +17,6 @@ const slides = [
 	},
 ]
 
-slides.forEach((slide) => {
-    const image = slide.image;
-    console.log(image);
-});
-
-
-
-
 //ajout des "dots"
 
 let Dots = document.querySelector(".dots")
@@ -35,9 +27,7 @@ for (let i = 0; i < slides.length; i++) {
 		dot.classList.add("dot_selected")
 	}
 	Dots.appendChild(dot)
-
 }
-
 
 let changementCarrousel = 0
 let bannerImg = document.querySelector(".banner-img")
@@ -61,7 +51,8 @@ arrowLeft.addEventListener("click", (event) => {
 
 		//Selectionne tout les dot et enlève la classe 'dot_selected'
 		document.querySelectorAll(".dot").forEach(dot => {
-			dot.classList.remove("dot_selected");})
+			dot.classList.remove("dot_selected")
+		})
 		
 		//ajoute la classe dot_selected au dot correspondant
 		let dotChangementCarrousel = document.querySelector(`.dot_${changementCarrousel}`)
@@ -84,11 +75,81 @@ arrowRight.addEventListener("click", (event) => {
 		bannerTxt.innerHTML = slides[changementCarrousel].tagLine       // Attention pas sécurisé
 
 		//Selectionne tout les dot et enlève la classe 'dot_selected'
-		document.querySelectorAll(".dot").forEach(dot => {
-			dot.classList.remove("dot_selected");})
+		document.querySelectorAll(".dot").forEach( dot => {
+			dot.classList.remove("dot_selected")
+		})
 		
 		//ajoute la classe dot_selected au dot correspondant
 		let dotChangementCarrousel = document.querySelector(`.dot_${changementCarrousel}`)
 		dotChangementCarrousel.classList.add("dot_selected")
 	}
 });
+
+
+let dot = document.querySelector(".dot")
+dot.addEventListener("click", (event) => {
+	if(event.button === 0){
+
+		//Selectionne tout les dot et enlève la classe 'dot_selected'
+		document.querySelectorAll(".dot").forEach(dot => {
+			dot.classList.remove("dot_selected")
+		})
+
+		let j = 0
+		let dotNumber = document.querySelector(`.dot_${j}`)
+		while (dotNumber !== null){
+			j++
+			dotNumber = document.querySelector(`.dot_${j}`)
+		}
+
+		//Changement de texte et d'image
+		bannerImg.src = `./assets/images/slideshow/${slides[j].image}`
+		bannerTxt.innerHTML = slides[j].tagLine       // Attention pas sécurisé
+
+		//Selectionne tout les dot et enlève la classe 'dot_selected'
+		document.querySelectorAll(".dot").forEach(dot => {
+			dot.classList.remove("dot_selected")
+		})
+		
+		//ajoute la classe dot_selected au dot correspondant
+		dotNumber.classList.add("dot_selected")
+	}
+})
+
+
+document.querySelectorAll(".dot").forEach( dot => {
+	dot.addEventListener("click", (event) => {
+		if (event.button === 0){
+			dot.classList.remove("dot_selected")
+			let dotTarget = event.target
+			for ( j=0; j < slides.length; j++) {
+				if (dotTarget.classList.contains(`.dot_${j}`)) {
+					bannerImg.src = `./assets/images/slideshow/${slides[j].image}`
+					bannerTxt.innerHTML = slides[j].tagLine       // Attention pas sécurisé
+					dot.classList.remove("dot_selected")
+					dot.classList.add("dot_selected")
+					
+				}
+			}
+
+		}
+	})
+})
+
+
+document.querySelectorAll(".dot").forEach((dot, j) => {
+	dot.addEventListener("click", (event) => {
+		if (event.button === 0) {
+			document.querySelectorAll(".dot").forEach(dot => {
+				dot.classList.remove("dot_selected")
+			})
+
+			let dotTarget = event.target
+			dotTarget.classList.add("dot_selected")
+			bannerImg.src = `./assets/images/slideshow/${slides[j].image}`
+			bannerTxt.innerHTML = slides[j].tagLine       // Attention pas sécurisé
+
+			
+		}
+	})
+})

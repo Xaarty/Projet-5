@@ -19,9 +19,10 @@ const slides = [
 
 //ajout des "dots"
 
-let dots = document.querySelector(".dots")
+const dots = document.querySelector(".dots")
+
 slides.forEach((slide, i) => {
-	let dot = document.createElement("div")
+	let dot = document.createElement("button")
 	dot.classList.add("dot", "dot_" + i)  //ajout de la class dot et une classe unique avec i
 	if (i === 0) {
 		dot.classList.add("dot_selected")
@@ -29,15 +30,15 @@ slides.forEach((slide, i) => {
 	dots.appendChild(dot)
 })
 
-let Dots = document.querySelectorAll(".dot")
+const dotsAll = document.querySelectorAll(".dot")
 let changementCarrousel = 0
-let bannerImg = document.querySelector(".banner-img")
-let bannerTxt = document.getElementById("banner-txt")
+const bannerImg = document.querySelector(".banner-img")
+const bannerTxt = document.getElementById("banner-txt")
 
 //Fonction pour retirer les classes dot_selected
 
 function removeSelected (dot) {
-	Dots.forEach(dot => {
+	dotsAll.forEach(dot => {
 		dot.classList.remove("dot_selected")
 	})
 }
@@ -93,7 +94,7 @@ arrowRight.addEventListener("click", (event) => {
 	}
 });
 
-Dots.forEach((dot, j) => {
+dotsAll.forEach((dot, j) => {
 	dot.addEventListener("click", (event) => {
 		if (event.button === 0) {
 			

@@ -19,21 +19,31 @@ const slides = [
 
 //ajout des "dots"
 
-let Dots = document.querySelector(".dots")
-for (let i = 0; i < slides.length; i++) {
+let dots = document.querySelector(".dots")
+slides.forEach((slide, i) => {
 	let dot = document.createElement("div")
 	dot.classList.add("dot", "dot_" + i)  //ajout de la class dot et une classe unique avec i
 	if (i === 0) {
 		dot.classList.add("dot_selected")
 	}
-	Dots.appendChild(dot)
-}
+	dots.appendChild(dot)
+})
 
+let Dots = document.querySelectorAll(".dot")
 let changementCarrousel = 0
 let bannerImg = document.querySelector(".banner-img")
 let bannerTxt = document.getElementById("banner-txt")
 
-//Event listener vérification du "clic" gauche à la souris
+//Fonction pour retirer les classes dot_selected
+
+function removeSelected (dot) {
+	Dots.forEach(dot => {
+		dot.classList.remove("dot_selected")
+	})
+}
+
+
+//Event listener vérification du "clic" gauche à la souris sur la flèche de gauche
 
 let arrowLeft = document.querySelector("#banner .arrow_left");
 arrowLeft.addEventListener("click", (event) => {
@@ -50,15 +60,15 @@ arrowLeft.addEventListener("click", (event) => {
 		bannerTxt.innerHTML = slides[changementCarrousel].tagLine       // Attention pas sécurisé
 
 		//Selectionne tout les dot et enlève la classe 'dot_selected'
-		document.querySelectorAll(".dot").forEach(dot => {
-			dot.classList.remove("dot_selected")
-		})
+		removeSelected()
 		
 		//ajoute la classe dot_selected au dot correspondant
 		let dotChangementCarrousel = document.querySelector(`.dot_${changementCarrousel}`)
 		dotChangementCarrousel.classList.add("dot_selected")
 	}
 });
+
+//Event listener vérification du "clic" gauche à la souris sur la flèche de droite
 
 let arrowRight = document.querySelector("#banner .arrow_right");
 arrowRight.addEventListener("click", (event) => {
@@ -75,9 +85,7 @@ arrowRight.addEventListener("click", (event) => {
 		bannerTxt.innerHTML = slides[changementCarrousel].tagLine       // Attention pas sécurisé
 
 		//Selectionne tout les dot et enlève la classe 'dot_selected'
-		document.querySelectorAll(".dot").forEach( dot => {
-			dot.classList.remove("dot_selected")
-		})
+		removeSelected()
 		
 		//ajoute la classe dot_selected au dot correspondant
 		let dotChangementCarrousel = document.querySelector(`.dot_${changementCarrousel}`)
@@ -85,71 +93,15 @@ arrowRight.addEventListener("click", (event) => {
 	}
 });
 
-
-let dot = document.querySelector(".dot")
-dot.addEventListener("click", (event) => {
-	if(event.button === 0){
-
-		//Selectionne tout les dot et enlève la classe 'dot_selected'
-		document.querySelectorAll(".dot").forEach(dot => {
-			dot.classList.remove("dot_selected")
-		})
-
-		let j = 0
-		let dotNumber = document.querySelector(`.dot_${j}`)
-		while (dotNumber !== null){
-			j++
-			dotNumber = document.querySelector(`.dot_${j}`)
-		}
-
-		//Changement de texte et d'image
-		bannerImg.src = `./assets/images/slideshow/${slides[j].image}`
-		bannerTxt.innerHTML = slides[j].tagLine       // Attention pas sécurisé
-
-		//Selectionne tout les dot et enlève la classe 'dot_selected'
-		document.querySelectorAll(".dot").forEach(dot => {
-			dot.classList.remove("dot_selected")
-		})
-		
-		//ajoute la classe dot_selected au dot correspondant
-		dotNumber.classList.add("dot_selected")
-	}
-})
-
-
-document.querySelectorAll(".dot").forEach( dot => {
-	dot.addEventListener("click", (event) => {
-		if (event.button === 0){
-			dot.classList.remove("dot_selected")
-			let dotTarget = event.target
-			for ( j=0; j < slides.length; j++) {
-				if (dotTarget.classList.contains(`.dot_${j}`)) {
-					bannerImg.src = `./assets/images/slideshow/${slides[j].image}`
-					bannerTxt.innerHTML = slides[j].tagLine       // Attention pas sécurisé
-					dot.classList.remove("dot_selected")
-					dot.classList.add("dot_selected")
-					
-				}
-			}
-
-		}
-	})
-})
-
-
-document.querySelectorAll(".dot").forEach((dot, j) => {
+Dots.forEach((dot, j) => {
 	dot.addEventListener("click", (event) => {
 		if (event.button === 0) {
-			document.querySelectorAll(".dot").forEach(dot => {
-				dot.classList.remove("dot_selected")
-			})
+			
+			removeSelected()
 
-			let dotTarget = event.target
-			dotTarget.classList.add("dot_selected")
+			dot.classList.add("dot_selected")
 			bannerImg.src = `./assets/images/slideshow/${slides[j].image}`
 			bannerTxt.innerHTML = slides[j].tagLine       // Attention pas sécurisé
-
-			
 		}
 	})
 })
